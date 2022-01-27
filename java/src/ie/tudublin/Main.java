@@ -16,7 +16,14 @@ public class Main
         System.out.println(lucy);
 
         // Tara Misty
-        // Tara Tara
+        // Tara Tara   (Correct one)
         
+        // Create new instance of cat object (created on the heap)
+        Cat cat = new Cat("Ginger");
+
+        while (cat.getNumLives() > 0) {
+            cat.kill();
+        }
+        cat.kill();
     }
 }
