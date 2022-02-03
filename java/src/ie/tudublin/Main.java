@@ -8,6 +8,12 @@ public class Main
         processing.core.PApplet.runSketch( a, new HelloProcessing());
     }
 
+    public static void bugZap()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new BugZap());
+    }
+
     public void cat()
     {
         System.out.println("Hello world");
@@ -33,10 +39,7 @@ public class Main
     }
     public static void main(String[] args)
     {
-        helloProcessing();
-
-        // Tara Misty
-        // Tara Tara
-        
+        // helloProcessing();
+        bugZap();
     }
 }
