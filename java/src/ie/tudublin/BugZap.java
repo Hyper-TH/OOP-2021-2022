@@ -5,6 +5,7 @@ import processing.core.PApplet;
 public class BugZap extends PApplet {
 
     float playerX, playerY, playerWidth;
+    int score;
 
     float bugX, bugY, bugWidth;
 	public void settings() {
@@ -53,6 +54,18 @@ public class BugZap extends PApplet {
         if (keyCode == RIGHT) {
             playerX += playerSpeed;
         }
+
+        if (key == ' ') {
+            float halfW = bugWidth / 2;
+            if (playerX > bugX - halfW && playerX < bugX + halfW) {
+                score ++;
+                resetBug();
+                line(playerX, playerY - 10, playerX, bugY);
+            }
+            else {
+                line(playerX, playerY, playerX, 0);
+            }
+        }
     }
 
     void moveBug() {
@@ -69,6 +82,8 @@ public class BugZap extends PApplet {
         if (frameCount % 20 == 0) { // if multiple of 20
             moveBug();
         }
+
+        text("Score: " + score, 50, 50);
     }
 
 
