@@ -8,6 +8,18 @@ public class Main
         processing.core.PApplet.runSketch( a, new HelloProcessing());
     }
 
+    public static void bugZap()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new BugZap());
+    }
+
+    public static void loops()
+	{
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Loops());
+    }
+
     public void cat()
     {
         System.out.println("Hello world");
@@ -33,7 +45,7 @@ public class Main
     }
     public static void main(String[] args)
     {
-        helloProcessing();
+        loops();
 
         // Tara Misty
         // Tara Tara
