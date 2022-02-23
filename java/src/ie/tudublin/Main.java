@@ -26,12 +26,6 @@ public class Main
         processing.core.PApplet.runSketch( a, new Arrays());
     }
 
-    public static void Mapping() 
-    {
-        String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new mapping());
-    }
-
 
     public void cat()
     {
@@ -58,7 +52,7 @@ public class Main
     }
     public static void main(String[] args)
     {
-        Mapping();
+        arrays();
 
         // Tara Misty
         // Tara Tara
