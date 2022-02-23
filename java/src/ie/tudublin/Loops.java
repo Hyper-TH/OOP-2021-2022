@@ -48,26 +48,68 @@ public class Loops extends PApplet
 		return d + ((howFar / r1) * r2);
 	}
 
-	
+	float offset = 0;
+
 	public void draw()
 	{
 		
+
 		switch(mode)	
 		{
 			case 0:
-				background(0);
-				int bars = (int) (mouseX / 20.0f);
-				float w = width / (float)bars;	
-				for(int i = 0 ; i < bars ; i ++)
-				{
-					noStroke();
-					fill(map(i, 0, bars, 0, 255), 255, 255);
-					rect(map(i, 0, bars, 0, 500), 0, w, height);
-				}
+			{
+				// background(0);
+				// int bars = (int) (mouseX / 20.0f);
+				// float w = width / (float)bars;	
+				// for(int i = 0 ; i < bars ; i ++)
+				// {
+				// 	noStroke();
+				// 	fill(map(i, 0, bars, 0, 255), 255, 255);
+				// 	rect(map(i, 0, bars, 0, 500), 0, w, height);
+				// }
 				break;
+			}
 			case 1:
-			
+			{
+				// int squares = (int) (mouseX / 20.f);
+				// float h = width / (float) squares;
+				// for(int i = 0; i < squares; i++)
+				// {
+				// 	noStroke();
+				// 	fill(map(i, 0, squares, 0, 255), 255, 255);
+					
+				// 	float x = map(i, 0, squares, 0, width);
+				// 	rect(x, x, h, h);	
+				// 	rect((width -h) -x, x, h, h);
+				// }
+
 				break;
+			}
+			case 2 :
+			{
+				// int numCircles  = (int) (20 * (mouseX / (float) width)) ;
+
+				// float w = width / (float) numCircles;
+				// float radius = w / 2.0f;
+				// colorMode(HSB);
+				// float cGap = 255 / (float) (numCircles * numCircles);
+				// noStroke();
+
+				// for(int j = 0 ; j < numCircles ; j ++)
+				// {		
+				// 	for(int i = 0 ; i < numCircles ; i ++)
+				// 	{
+				// 		float x = radius + (i * w);
+				// 		float y = radius + (j * w);
+				// 		float c = (cGap * i * j + offset) % 255; 
+				// 		fill(c, 255, 255);
+				// 		ellipse(x, y, w, w);
+				// 	}
+				// }
+				// offset += mouseY / 250.0f;
+
+
+
 				//map(a,b,c,d,e);
 				//a = inputvalue
 				// b - c - start and end of the first range
@@ -75,6 +117,49 @@ public class Loops extends PApplet
 
 				// map(-2, 10, 90, 200, 233);
 
-		}
+				break;
+			}
+			case 3:
+			{
+				float gap = width * 0.1f;
+				float halfGap = gap / 2.0f;
+				colorMode(RGB);
+				stroke(0, 255, 0);
+				textAlign(CENTER, CENTER);
+
+				for(int i = -5 ; i <=5 ; i ++)
+				{
+					float x = map(i, -5, 5, gap, width -gap);				
+					line(x, gap, x, height - gap);
+					line(gap, x, width - gap, x);
+					fill(255);
+					text(i, x, halfGap);
+					text(i, halfGap, x);
+					
+				}
+
+				break;
+			}
+			case 4:
+			{
+				background(0);
+				int circles = (int) (mouseX / 20.f);
+				offset += mouseY;
+				float d = width / (float) circles;
+				for(int j = 0; j < circles; j++) 
+				{
+					for(int i = 0; i < circles; i++)
+					{
+						noStroke();
+
+						float c = map((i + j + offset), 0, circles * 2, 0, 255) % 256;
+						fill(c, 255, 255);
+						float x = map(i, 0, circles - 1, d / 2.0f, width - (d / 2.0f));
+						float y = map(j, 0, circles - 1, d / 2.0f, width - (d / 2.0f));
+						circle(x, y, d);
+					}
+				}
+			}
+		}	
 	}
 }
