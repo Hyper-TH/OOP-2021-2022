@@ -39,4 +39,29 @@ public class mapping extends PApplet
         stop2 (float) = upper bound of the value's target range 
 
     */
+
+    // This is how the map function works!
+    public float map1(float from, float start1, float stop1, float start2, float stop2) {
+        float range1 = stop1 - start1;
+        float range2 = stop2 - start2;
+        float howFar = from - start1;
+
+        return start2 + (howFar / range1) * range2;
+    }
+
+    // This is a demo of the map function
+    public void drawGrid() {
+        stroke(0, 255, 0);
+        float border = width * 0.1f;
+        textAlign(CENTER, CENTER);
+        for (int i = -5; i <= 5; i++) {
+            float x = map(i, -5, 5, border, width - border);
+            line(x, border, x, height - border);
+            line(border, x, width - border, x);
+            fill(255);
+            text(i, x, border * 0.5f);
+            text(i, border * 0.5f, x);
+        }
+    }
+    
 } // end class
