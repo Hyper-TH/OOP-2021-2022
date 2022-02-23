@@ -6,24 +6,21 @@ public class Loops extends PApplet {
 
     int mode = 0;
 
-    public void settings()
-    {
-        size(500, 500);
-    }
+	public void settings() {
+		size(500, 500);
+	}
 
-    public void setup() {
-        colorMode(HSB);
-        
-    }
+	public void setup() {
+		colorMode(HSB);
 
-    public void keyPressed()
-    {
-        if (key >= '0' && key <='9')
-        {
-            mode = key - '0';
-        }
-        println(mode);
-    }
+	}
+
+	public void keyPressed() {
+		if (key >= '0' && key <= '9') {
+			mode = key - '0';
+		}
+		println(mode);
+	}
 
 	float magicMap(float a, float b, float c, float d, float e) {
 		float output;
