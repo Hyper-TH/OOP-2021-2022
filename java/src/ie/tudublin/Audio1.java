@@ -8,10 +8,31 @@ import processing.core.PApplet;
 
 public class Audio1 extends PApplet
 {
-    Minim minim;    
+    Minim minim;
     AudioPlayer ap;
     AudioInput ai;
     AudioBuffer ab;
+
+    int mode = 0;
+
+    float[] lerpedBuffer;
+    float y = 0;
+    float smoothedY = 0;
+    float smoothedAmplitude = 0;
+
+    public void keyPressed() {
+		if (key >= '0' && key <= '9') {
+			mode = key - '0';
+		}
+		if (keyCode == ' ') {
+            if (ap.isPlaying()) {
+                ap.pause();
+            } else {
+                ap.rewind();
+                ap.play();
+            }
+        }
+	}
 
     public void settings()
     {
@@ -20,47 +41,66 @@ public class Audio1 extends PApplet
 
     public void setup()
     {
-        // Constructors
         minim = new Minim(this);
-        ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        ab = ai.mix;
+        // Uncomment this to use the microphone
+        // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
+        // ab = ai.mix; 
+        ap = minim.loadFile("heroplanet.mp3", 1024);
+        ap.play();
+        ab = ap.mix;
         colorMode(HSB);
-    
+
         y = height / 2;
+        smoothedY = y;
+
+        lerpedBuffer = new float[width];
     }
-    
+
     public void draw()
     {
         background(0);
-        stroke(255);
         float halfH = height / 2;
         float average = 0;
         float sum = 0;
-        
-        for (int i = 0; i < ab.size(); i++)
+
+        // Calculate sum and average of the samples
+        // Also lerp each element of buffer;
+        for(int i = 0 ; i < ab.size() ; i ++)
         {
-            // float c = map(ab.get(i), -1, 1, 0, 255);
-            float c = map(i, 0, ab.size(), 0 ,255);
-
-            stroke(c, 255, 255);
-            // line(i, halfH, i, halfH + ab.get(i) * halfH);
             sum += abs(ab.get(i));
-    
+            lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
         }
-        average = sum / (float) ab.size();
+        average= sum / (float) ab.size();
 
+        smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
+
+        switch (mode) {
+			case 0:
+                for(int i = 0 ; i < ab.size() ; i ++)
+                {
+                    //float c = map(ab.get(i), -1, 1, 0, 255);
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    float f = lerpedBuffer[i] * halfH * 4.0f;
+                    line(i, halfH + f, i, halfH - f);                    
+                }
+        case 1:
+                {}
+            }
+
+        
+        // Other examples we made in the class
+        /*
         stroke(255);
-        fill(100, 255,255);
-        lerpedA = lerp(lerpedA, average, 0.1f);
+        fill(100, 255, 255);        
+        
         circle(width / 2, halfH, lerpedA * 100);
 
         circle(100, y, 50);
         y += random(-10, 10);
-        smoothedY = lerp(smoothedY, y, 0.1f);
+        smoothedY = lerp(smoothedY, y, 0.1f);        
         circle(200, smoothedY, 50);
-    }
+        */
 
-    float y;
-    float smoothedY;
-    float lerpedA;
+    }        
 }
