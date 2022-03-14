@@ -11,12 +11,12 @@ public class BugZap extends PApplet {
 		reset();
 	}
 
-	float playerX, playerY;
-	float playerSpeed = 5;
+	float playerX, playerY; 			// Player position
+	float playerSpeed = 5; 				// Move by 5 pixels
 	float playerWidth = 40;
 	float halfPlayerWidth = playerWidth / 2;
 
-	float bugX, bugY, bugWidth = 30;
+	float bugX, bugY, bugWidth = 30;	// Bug position
 	float halfBugWidth = bugWidth / 2;
 
 	int score = 0;

@@ -70,8 +70,9 @@ public class Main
     }
     public static void main(String[] args)
     {
-        colorfulLife();
-
+        // colorfulLife();
+        // bugZap();
+        loops();
         // Tara Misty
         // Tara Tara
         
